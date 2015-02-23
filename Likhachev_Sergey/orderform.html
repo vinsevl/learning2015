@@ -1,0 +1,39 @@
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+<form action="processorder.php" method="post">
+<table border="0">
+<tr bgcolor="#ccffff">
+	<td width="150">Товар</td>
+	<td width="15">Количество</td>
+</tr>
+<tr>
+	<td>Покрышки</td>
+	<td align="center"><input type="text" name="tireqty" size="3" maxlenght="3" /></td>
+</tr>
+<tr>
+	<td>Масло</td>
+	<td align="center"><input type="text" name="oilqty" size="3" maxlenght="3" /></td>
+</tr>
+<tr>
+	<td>Свечи зажигания</td>
+	<td align="center"><input type="text" name="sparkqty" size="3" maxlenght="3" /></td>
+</tr>
+
+<!--Выплывающий список  ответов--> 
+<tr>
+	<td>Как вы нашли наш магазин?</td>
+	<td>
+		<select name="find">
+		<option value="a">Я постоянный клиент</option>
+		<option value="b">В телевизионной рекламе</option>
+		<option value="c">В телефонном справочнике</option>
+		<option value="d">Устная рекомендация</option>
+		</select>
+	</td>
+</tr>
+<!--кнопка Отправить заказ-->
+<tr>
+	<td colspan="2" align="center"><input type="submit" value="Отправить заказ"/></td>
+</tr>
+</table>
+</form>
