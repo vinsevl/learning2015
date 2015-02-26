@@ -1,0 +1,47 @@
+
+RewriteEngine on
+#путь от корня сайта до .htaccess
+RewriteBase /proj/
+
+#а)При обращении к сайту из браузера Google Chrome выдавать мануал на английском языке.
+#  Для остальных русский
+
+#если Chrome, то выдаем мануал на английском
+RewriteCond %{HTTP_USER_AGENT} ^(Chrome.*)
+RewriteRule ^(.*)$ en/ [L]
+#иначе на русском
+RewriteRule ^(.*)$ ru/ [L]
+
+#б) Если идет обращение к ресурсам, описывающим работу итераторов (в названии есть iterator)
+#   или любые цифры, делать 302 редирект в зависимости от языка на сайт http://php.su или http://php.net
+
+#если запрашиваем англоязычный ресурс, то идем http://php.net
+RewriteCond %{REQUEST_URI} ^(\/proj\/en\/.*)
+#если есть слово "iterator" или цифры
+RewriteRule ^(en\/(.*iterator.*\..*))|(en\/([0-9]+\..*))$ http://php.net [R=302,L]
+#если запрашиваем рускоязычный ресурс, то идем http://php.su
+RewriteCond %{REQUEST_URI} ^(\/proj\/ru\/)
+RewriteRule ^(ru\/(.*iterator.*\..*))|(ru\/([0-9]+\..*))$ http://php.su [R=302,L]
+
+
+#в) заменить при обращении к ресурсам слово ftp на ssh2
+
+RewriteRule ^(.*)ftp(.*) $1ssh2$2 [L]
+
+
+#г) Для текущего веб-сервера сделать вывод логов в папку logs
+#   При запросе http://localhost/errors выдавать лог ошибок, а 
+#   при http://localhost/access выдавать лог доступа
+  
+RewriteRule ^errors$ logs/error.log
+RewriteRule ^access$ logs/access.log
+
+#д) Если ни одной страницы не найдено, то выдавать индексную на подходящем языке
+
+# в случае ошибки "NOT FOUND" выдать индексную страницу
+ErrorDocument 404 /proj/index.html
+
+ 
+
+
+
